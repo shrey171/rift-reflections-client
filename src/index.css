@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Kaushan+Script&family=Baloo+Paaji+2:wght@400..800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+
+  body {
+    font-family: 'Baloo Paaji 2', sans-serif;
+  }
+
+  .inverted-border::before,
+  .inverted-border::after {
+    content: '';
+    --size: 20px;
+    width: var(--size);
+    aspect-ratio: 1;
+    display: block;
+    background: hsl(217, 80%, 5%);
+    background-image: radial-gradient(circle at 0% 0%, transparent var(--size), #f1f5f9 calc(var(--size) + 1px));
+    position: absolute;
+    z-index: 0;
+  }
+
+  .inverted-border::before {
+    top: 0;
+    left: 100%;
+    translate: -100% -100%;
+  }
+
+  .inverted-border::after {
+    bottom: 0;
+    left: 100%;
+    translate: -100% 100%;
+    rotate: -90deg;
+  }
+}
