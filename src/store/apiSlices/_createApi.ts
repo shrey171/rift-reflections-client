@@ -8,6 +8,7 @@ type TBaseQuery = BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError |
 
 const rawBaseQuery = fetchBaseQuery({
   baseUrl,
+  mode: 'cors',
   credentials: 'include',
   prepareHeaders: ((headers, { getState }) => {
     headers.set('Access-Control-Allow-Origin', '*')
