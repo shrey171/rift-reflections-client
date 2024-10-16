@@ -34,7 +34,6 @@ export const DeathNote = () => {
     control,
     handleSubmit,
     setValue,
-    formState: { errors },
   } = useForm<TDeathNote>({
     resolver: zodResolver(DeathNoteSchema),
   });
@@ -90,7 +89,7 @@ export const DeathNote = () => {
 
         <form
           className="grid md:place-items-center gap-16 w-full my-20 xl:px-12">
-          {current?.notes.map((note: any, idx: number) => (
+          {current?.notes.map((_: any, idx: number) => (
             <div className="flex w-11/12" key={idx}>
               <p className="px-4 flex py-2 h-full">{idx + 1}</p>
               <div className="w-full grid gap-1">
