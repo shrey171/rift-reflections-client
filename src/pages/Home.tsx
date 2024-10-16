@@ -1,8 +1,6 @@
-import { useSpinner } from "hooks";
 import { Link } from "react-router-dom";
 
 export const Home = () => {
-  const { isLoading } = useSpinner();
   return (
     <div className="flex flex-col gap-3 justify-center items-center h-full">
       <p className="text-2xl">Coming soon...</p>
