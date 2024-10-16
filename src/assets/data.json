@@ -1,0 +1,74 @@
+{
+  "matches": [
+    {
+      "id": 0,
+      "date": "2022-01-01",
+      "deaths": 5,
+      "win": true,
+      "userChampion": "Gwen",
+      "enemyChampion": "Nunu",
+      "notes": [
+        {
+          "content": "Death one",
+          "cause": "macro",
+          "worth": false
+        },
+        {
+          "content": "Death two",
+          "cause": "micro",
+          "worth": false
+        },
+        {
+          "content": "Death three",
+          "cause": "other",
+          "worth": true
+        },
+        {
+          "content": "Death four",
+          "cause": "micro",
+          "worth": true
+        },
+        {
+          "content": "Death five",
+          "cause": "other",
+          "worth": false
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "date": "2022-01-02",
+      "deaths": 10,
+      "win": false,
+      "userChampion": "Diana",
+      "enemyChampion": "Volibear",
+      "notes": [
+        {
+          "content": "Death one",
+          "cause": "macro",
+          "worth": false
+        },
+        {
+          "content": "Death two",
+          "cause": "micro",
+          "worth": false
+        },
+        {
+          "content": "Death three",
+          "cause": "other",
+          "worth": true
+        },
+        {
+          "content": "Death four",
+          "cause": "micro",
+          "worth": true
+        },
+        {
+          "content": "Death five",
+          "cause": "other",
+          "worth": false
+        }
+      ]
+    }
+  ]
+}

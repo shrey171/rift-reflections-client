@@ -11,12 +11,13 @@
 
   body {
     font-family: 'Baloo Paaji 2', sans-serif;
+    overflow: hidden;
   }
 
   .inverted-border::before,
   .inverted-border::after {
     content: '';
-    --size: 20px;
+    --size: 15px;
     width: var(--size);
     aspect-ratio: 1;
     display: block;
@@ -38,4 +39,16 @@
     translate: -100% 100%;
     rotate: -90deg;
   }
+}
+
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+      display: none;
+  }
+ /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+}
 }

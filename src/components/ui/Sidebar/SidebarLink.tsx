@@ -11,7 +11,7 @@ interface ISidebarLinkProps {
 
 const ActiveIndicator = ({ isActive }: { isActive: boolean }) =>
   isActive && (
-    <span className="inverted-border w-11/12 rounded-s-full h-full bg-frost right-0 top-0 -z-10 absolute" />
+    <span className="w-full hidden absolute h-full right-0 top-0 transition-all duration-300 inverted-border lg:block" />
   );
 
 export const SidebarLink = ({
@@ -21,10 +21,11 @@ export const SidebarLink = ({
   ActiveIconClasses,
   to,
 }: ISidebarLinkProps) => {
-  const isActive = window.location.pathname === to;
+  const path = window.location.pathname;
+  const isActive = path === to || path.split("/")[1] === to.split("/")[1];
   const className = twMerge(
-    "flex items-center gap-2 ps-12 py-3 relative z-0",
-    isActive && "text-secondary nav-active"
+    "flex items-center gap-2 px-6 py-2 lg:py-3 bg-opacity-0 relative z-0 lg:ms-8 lg:rounded-e-none",
+    isActive && "text-secondary nav-active bg-opacity-100 bg-frost rounded-full"
   );
 
   return (
@@ -37,7 +38,7 @@ export const SidebarLink = ({
           isActive && ActiveIconClasses
         )}
       />
-      <p className="text-xl">{text}</p>
+      <p className="lg:text-xl">{text}</p>
     </Link>
   );
 };

@@ -28,7 +28,8 @@ export const Login = () => {
     try {
       await login(data);
     } catch (e: any) {
-      setError("root", { message: e?.message || "Login Failed" });
+      console.log('onSubmit ~ e', e)
+      setError("root", { message: e?.data?.message || "Login Failed" });
     }
   };
 

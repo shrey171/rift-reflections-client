@@ -3,11 +3,13 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { selectToken, setAccessToken, useLazyRefreshQuery } from "store";
 import { Sidebar } from "components/ui";
+import { useSpinner } from "hooks";
 
 export const ProtectedLayout: React.FC = () => {
   const token = useSelector(selectToken);
-  const [refresh, { isLoading }] = useLazyRefreshQuery();
+  const [refresh] = useLazyRefreshQuery();
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const {setIsLoading} = useSpinner();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -18,27 +20,26 @@ export const ProtectedLayout: React.FC = () => {
         return;
       }
       try {
+        setIsLoading(true);
         const { session } = await refresh().unwrap();
         dispatch(setAccessToken(session.access_token)); // Store new token in Redux
         setIsAuthenticated(true); // Allow access to protected routes
       } catch (error) {
         console.error("Refresh token failed:", error);
         navigate(`/login`, { replace: true }); // Redirect to login
+      } finally {
+        setIsLoading(false);
       }
     };
 
     verifyAuth();
-  }, [token, refresh, dispatch, navigate]);
-
-  if (isLoading) {
-    return <p>Loading...</p>; // Show loading state during refresh
-  }
+  }, [token, refresh]);
 
   if (isAuthenticated) {
     return (
-      <main className="flex bg-secondary text-frost p-4 pl-0 w-full min-h-screen">
+      <main className="flex flex-col bg-secondary p-4 text-frost w-full h-screen lg:flex-row lg:pl-0">
         <Sidebar />
-        <div className="rounded-lg bg-frost text-secondary overflow-clip w-full p-4">
+        <div className="rounded-lg bg-frost text-secondary overflow-y-scroll w-full grow p-4 max-h-[calc(100dvh-2rem)]">
           <Outlet />
         </div>
       </main>
