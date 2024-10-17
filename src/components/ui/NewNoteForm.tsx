@@ -19,7 +19,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { NewNoteFormField } from "./NewNoteFormField";
 import { useSpinner } from "hooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const NewNoteSchema = z.object({
   userChampion: z.string().min(1, { message: "Your Champion Required" }),
@@ -36,7 +36,7 @@ type TNewNoteSchema = z.infer<typeof NewNoteSchema>;
 
 export function NewNoteForm() {
   const [isOpen, setIsOpen] = useState(false);
-  const { data: champions, isSuccess } = useGetChampionsQuery();
+  const { data: champions, isSuccess, isLoading: isQueryLoading } = useGetChampionsQuery();
   const [mutation] = useNewDeathNoteMutation();
   const {
     control,
@@ -53,13 +53,14 @@ export function NewNoteForm() {
       enemyChampion: "",
     },
   });
-  const { asyncWrapper } = useSpinner();
+  const { asyncWrapper, setIsLoading } = useSpinner();
 
   const onSubmit = asyncWrapper(async (data: TNewNoteSchema) => {
     await mutation(data);
     reset();
     setIsOpen(false);
   });
+  useEffect(() => setIsLoading(isQueryLoading), [isQueryLoading]);
 
   return (
     isSuccess && (
