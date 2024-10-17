@@ -10,7 +10,6 @@ const rawBaseQuery = fetchBaseQuery({
   baseUrl,
   credentials: 'include',
   prepareHeaders: ((headers, { getState }) => {
-    headers.set('Access-Control-Allow-Origin', '*')
     const token = (getState() as RootState).auth.token
     if (token) {
       headers.set('authorization', `Bearer ${token}`);

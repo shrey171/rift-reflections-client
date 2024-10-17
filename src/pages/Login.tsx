@@ -35,7 +35,7 @@ export const Login = () => {
 
   return (
     <div className="flex flex-col gap-16 justify-center items-center w-full  min-h-screen">
-      <h1 className="text-3xl">Log-in to <span className="font-bold">Rift Reflections</span></h1>
+      <h1 className="text-3xl">Log into <span className="font-bold">Rift Reflections</span></h1>
       <form onSubmit={handleSubmit(onSubmit)} className="w-10/12 max-w-md grid">
         <div>
           <Label htmlFor="email" className="capitalize font-semibold text-lg">
