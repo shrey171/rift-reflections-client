@@ -41,7 +41,14 @@ export const Register = () => {
     try {
       await mutation(data);
     } catch (e: any) {
-      setError("root", { message: e?.message || "Registration Failed" });
+      const valdiationErrors = e?.data?.valdiationErrors;
+      if (!valdiationErrors) {
+        return setError("root", { message: e?.data?.message || "Registration Failed" });
+      }
+      Object.keys(valdiationErrors).forEach((key) => {
+        //@ts-ignore
+        setError(key, { message: valdiationErrors[key] });
+      })      
     }
   };
 

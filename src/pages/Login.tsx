@@ -28,14 +28,22 @@ export const Login = () => {
     try {
       await login(data);
     } catch (e: any) {
-      console.log('onSubmit ~ e', e)
-      setError("root", { message: e?.data?.message || "Login Failed" });
+      const valdiationErrors = e?.data?.valdiationErrors;
+      if (!valdiationErrors) {
+        return setError("root", { message: e?.data?.message || "Login Failed" });
+      }
+      Object.keys(valdiationErrors).forEach(key => {
+        //@ts-ignore
+        setError(key, { message: valdiationErrors[key] });
+      });
     }
   };
 
   return (
     <div className="flex flex-col gap-16 justify-center items-center w-full  min-h-screen">
-      <h1 className="text-3xl">Log into <span className="font-bold">Rift Reflections</span></h1>
+      <h1 className="text-3xl">
+        Log into <span className="font-bold">Rift Reflections</span>
+      </h1>
       <form onSubmit={handleSubmit(onSubmit)} className="w-10/12 max-w-md grid">
         <div>
           <Label htmlFor="email" className="capitalize font-semibold text-lg">
@@ -53,7 +61,9 @@ export const Login = () => {
           )}
         </div>
         <div className="mt-6">
-          <Label htmlFor="password" className="capitalize font-semibold text-lg">
+          <Label
+            htmlFor="password"
+            className="capitalize font-semibold text-lg">
             password
           </Label>
           <Input
@@ -72,10 +82,18 @@ export const Login = () => {
           {errors?.root && (
             <p className="text-red-500">{errors?.root?.message}</p>
           )}
-          <Button disabled={isLoading || isSubmitting} className="text-lg font-semibold w-full py-6 mt-2" type="submit">
+          <Button
+            disabled={isLoading || isSubmitting}
+            className="text-lg font-semibold w-full py-6 mt-2"
+            type="submit">
             Login
           </Button>
-          <p className="mt-3">Don't have an account? <Link className="underline" to="/register" replace>Register here</Link></p>
+          <p className="mt-3">
+            Don't have an account?{" "}
+            <Link className="underline" to="/register" replace>
+              Register here
+            </Link>
+          </p>
         </div>
       </form>
     </div>
