@@ -25,7 +25,7 @@ export const SidebarLink = ({
   const isActive = path === to || path.split("/")[1] === to.split("/")[1];
   const className = twMerge(
     "flex items-center gap-2 px-6 py-2 lg:py-3 bg-opacity-0 relative z-0 lg:ms-8 lg:rounded-e-none",
-    isActive && "text-secondary nav-active bg-opacity-100 bg-frost rounded-full"
+    isActive && "text-secondary nav-active bg-opacity-100 bg-frost rounded-xl"
   );
 
   return (

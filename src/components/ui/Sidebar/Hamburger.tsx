@@ -11,13 +11,13 @@ export const Hamburger = ({ IsOpenState }: IHamburger) => {
     <Close
     // @ts-ignore
       onClick={() => setIsOpen(false)}
-      className="h-8 w-min text-frost cursor-pointer lg:hidden"
+      className="h-8 w-min text-frost cursor-pointer md:hidden"
     />
   ) : (
     <Lines
     // @ts-ignore
       onClick={() => setIsOpen(true)}
-      className="h-8 w-min text-frost cursor-pointer lg:hidden"
+      className="h-8 w-min text-frost cursor-pointer md:hidden"
     />
   );
 };
